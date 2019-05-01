@@ -111,4 +111,19 @@ public class ActivosApi {
             return ResponseEntity.status(500).build();
         }
     }
+
+    @PostMapping(value = "/crearActivoFijo", consumes = "application/json")
+    public ResponseEntity<?> crearActivo(@RequestBody ActivoFijo activoFijo){
+        PruebaTecnicaApplication.logger.info("Creando nuevo activo...");
+        try{
+            ActivoFijo nuevoActivoFijo = implActivoFijoService.crearActivo(activoFijo);
+            PruebaTecnicaApplication.logger.info("Activo Fijo con datos : "+nuevoActivoFijo.toString()+" \n creado satisfactoriamente.");
+            return new ResponseEntity(activoFijo, HttpStatus.CREATED);
+        }
+        catch (Exception ex){
+            PruebaTecnicaApplication.logger.error("Imposible crear el nuevo activo fijo. Asegúrese de que los datos ingresados" +
+                    " sean correctos.");
+            return ResponseEntity.badRequest().build();
+        }
+    }
 }

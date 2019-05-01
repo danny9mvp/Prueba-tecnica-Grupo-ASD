@@ -1,5 +1,7 @@
 package com.grupoasd.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
@@ -63,9 +65,21 @@ public class ActivoFijo implements Serializable {
         this.afijId = afijId;
     }
 
-    public ActivoFijo(Integer afijId, String afijNombre, String afijDescripcion, String afijTipo, String afijNumeroserie,
-                      String afijNumeroinventario, float afijAlto, float afijLargo, float afijAncho, float afijPeso,
-            BigInteger afijValorCompra , Date afijFechacompra, Date afijFechabaja, String afijEstadoactual, String afijColor) {
+    public ActivoFijo(String afijNombre, String afijDescripcion, String afijTipo, BigInteger afijValorcompra, String afijEstadoactual) {
+        this.afijNombre = afijNombre;
+        this.afijDescripcion = afijDescripcion;
+        this.afijTipo = afijTipo;
+        this.afijValorcompra = afijValorcompra;
+        this.afijEstadoactual = afijEstadoactual;
+    }
+
+    public ActivoFijo(@JsonProperty("nombre") String afijNombre, @JsonProperty("descripcion") String afijDescripcion
+            , @JsonProperty("tipo") String afijTipo, @JsonProperty("serial") String afijNumeroserie,
+                      @JsonProperty("numeroInventario") String afijNumeroinventario, @JsonProperty("alto") float afijAlto
+            , @JsonProperty("largo") float afijLargo, @JsonProperty("ancho") float afijAncho, @JsonProperty("peso") float afijPeso,
+                      @JsonProperty("valorCompra") BigInteger afijValorCompra , @JsonProperty("fechaCompra") Date afijFechacompra
+            , @JsonProperty("fechaBaja") Date afijFechabaja, @JsonProperty("estadoActual") String afijEstadoactual,
+                      @JsonProperty("color") String afijColor) {
         this.afijId = afijId;
         this.afijNombre = afijNombre;
         this.afijDescripcion = afijDescripcion;
@@ -241,7 +255,7 @@ public class ActivoFijo implements Serializable {
 
     @Override
     public String toString() {
-        return String.format("ActivoFijo:{id:%s, nombre:%s, descripcion:%s, tipo:%s}", this.getAfijId(), this.getAfijNombre(),
-                this.getAfijDescripcion(), this.getAfijTipo());
+        return String.format("ActivoFijo:{id:%s, nombre:%s, descripcion:%s, tipo:%s, estadoActual:%s}", this.getAfijId(),
+                this.getAfijNombre(), this.getAfijDescripcion(), this.getAfijTipo(), this.getAfijEstadoactual());
     }
 }

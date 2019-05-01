@@ -14,7 +14,7 @@ public class ImplActivoFijoService implements ActivoFijoService{
 
     @Override
     public ActivoFijo crearActivo(ActivoFijo nuevoActivoFijo) {
-        return null;
+        return activoFijoRepository.save(nuevoActivoFijo);
     }
 
     @Override
