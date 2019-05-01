@@ -20,16 +20,16 @@ public class ImplListaActivosFijosService implements ListaActivosFijosService{
 
     @Override
     public List<ListaActivosFijos> listarActivosFijosPorTipo(String tipo) {
-        return null;
+        return listaActivosFijosRepository.findAllByAfijTipo(tipo);
     }
 
     @Override
     public List<ListaActivosFijos> listarActivosFijosPorFechaDeCompra(Date fechaDeCompra) {
-        return null;
+        return listaActivosFijosRepository.findAllByAfijFechacompraStartingWith(fechaDeCompra);
     }
 
     @Override
-    public List<ListaActivosFijos> listarActivosFijosPorNumeroDeSerie(String numeroDeSerie) {
-        return null;
+    public ListaActivosFijos buscarActivoFijoPorNumeroDeSerie(String numeroDeSerie) {
+        return listaActivosFijosRepository.findByAfijNumeroserie(numeroDeSerie);
     }
 }

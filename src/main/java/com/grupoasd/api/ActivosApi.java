@@ -6,14 +6,14 @@ import com.grupoasd.pruebatecnica.PruebaTecnicaApplication;
 import com.grupoasd.services.ImplActivoFijoService;
 import com.grupoasd.services.ImplListaActivosFijosService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import javax.xml.ws.Response;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @RestController
 @CrossOrigin(origins = "*", methods = {RequestMethod.GET,RequestMethod.POST, RequestMethod.PUT})
@@ -36,6 +36,77 @@ public class ActivosApi {
             }
         }
         catch(Exception ex){
+            PruebaTecnicaApplication.logger.error("500: "+ex);
+            return ResponseEntity.status(500).build();
+        }
+    }
+
+    @GetMapping(value = "/tipo/{afijTipo}")
+    public ResponseEntity<?> buscarPorTipo(@PathVariable("afijTipo") String afijTipo){
+        PruebaTecnicaApplication.logger.info("El cliente con IP **** **** ***** ha hecho una petición GET al recurso 'activos/tipo/"
+                +afijTipo+"'.");
+        try{
+            List<ListaActivosFijos> activosPorTipo = implListaActivosFijosService.listarActivosFijosPorTipo(afijTipo);
+            if(!activosPorTipo.isEmpty()){
+                PruebaTecnicaApplication.logger.info("200: "+activosPorTipo.size()+" Activos Fijos del tipo '"+afijTipo+"' fueron" +
+                        " encontrados.");
+                return new ResponseEntity<>(activosPorTipo, HttpStatus.OK);
+            }
+            else{
+                PruebaTecnicaApplication.logger.warn("404: No se encontraron resultados en el recurso 'activos/tipo/"+afijTipo+"'.");
+                return ResponseEntity.notFound().build();
+            }
+        }
+        catch(Exception ex){
+            PruebaTecnicaApplication.logger.error("500: "+ex);
+            return ResponseEntity.status(500).build();
+        }
+
+    }
+
+    @GetMapping("/fechaDeCompra/{stringFechaCompra}")
+    public ResponseEntity<?> buscarPorFechaDeCompra(@PathVariable("stringFechaCompra")
+                                                        @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date afijFechaCompra){
+        PruebaTecnicaApplication.logger.info("El cliente con IP **** **** ***** ha hecho una petición GET al recurso 'activos/fechaDecompra/"
+                +afijFechaCompra+"'.");
+        try{
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+            PruebaTecnicaApplication.logger.info("Fecha: "+afijFechaCompra);
+            List<ListaActivosFijos> activosPorFechaDeCompra = implListaActivosFijosService.listarActivosFijosPorFechaDeCompra(afijFechaCompra);
+            if(!activosPorFechaDeCompra.isEmpty()){
+                PruebaTecnicaApplication.logger.info("200: "+activosPorFechaDeCompra.size()+" Activos Fijos con fecha de compra " +
+                        "'" + afijFechaCompra + "' fueron encontrados.");
+                return new ResponseEntity<>(activosPorFechaDeCompra, HttpStatus.OK);
+            }
+            else{
+                PruebaTecnicaApplication.logger.warn("404: No se encontraron resultados en el recurso '/activos/fechaDeCompra/"+afijFechaCompra+"'.");
+                return ResponseEntity.notFound().build();
+            }
+        }
+        catch(Exception ex){
+            ex.printStackTrace();
+            PruebaTecnicaApplication.logger.error("500: "+ex);
+            return ResponseEntity.status(500).build();
+        }
+    }
+
+    @GetMapping("/numeroDeSerie/{numeroDeSerie}")
+    public ResponseEntity<?> buscarPorNumeroDeSerie(@PathVariable("numeroDeSerie") String numeroDeSerie){
+        PruebaTecnicaApplication.logger.info("El cliente con IP **** **** ***** ha hecho una petición GET al recurso 'activos/numeroDeSerie/"
+        +numeroDeSerie);
+        try{
+            if(implListaActivosFijosService.buscarActivoFijoPorNumeroDeSerie(numeroDeSerie) != null){
+                PruebaTecnicaApplication.logger.info("200:  Activo Fijo con número de serie "+numeroDeSerie+" encontrado.");
+                return new ResponseEntity(implListaActivosFijosService.buscarActivoFijoPorNumeroDeSerie(numeroDeSerie), HttpStatus.OK);
+            }
+            else{
+                PruebaTecnicaApplication.logger.warn("404: No se encontraron resultados en el recurso '/activos/numeroDeSerie/"+numeroDeSerie+"'.");
+                return ResponseEntity.notFound().build();
+            }
+        }
+        catch(Exception ex){
+            ex.printStackTrace();
             PruebaTecnicaApplication.logger.error("500: "+ex);
             return ResponseEntity.status(500).build();
         }
