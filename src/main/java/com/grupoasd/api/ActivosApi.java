@@ -121,7 +121,7 @@ public class ActivosApi {
             return new ResponseEntity(activoFijo, HttpStatus.CREATED);
         }
         catch (Exception ex){
-            PruebaTecnicaApplication.logger.error("Imposible crear el nuevo activo fijo. Asegúrese de que los datos ingresados" +
+            PruebaTecnicaApplication.logger.error("404: Imposible crear el nuevo activo fijo. Asegúrese de que los datos ingresados" +
                     " sean correctos.");
             return ResponseEntity.badRequest().build();
         }
@@ -131,13 +131,13 @@ public class ActivosApi {
     public ResponseEntity<?> actualizarActivo(@PathVariable("afijId") int afijId, @RequestBody ActivoFijo activoFijo){
         PruebaTecnicaApplication.logger.info("El cliente con IP **** **** ***** ha hecho una petición PUT al recurso 'activos/actualizarActivoFijo/"+afijId);
         if(!(implActivoFijoService.buscarPorId(afijId).isPresent())){
-            PruebaTecnicaApplication.logger.warn("400: El activo fijo con id = "+afijId+" no existe.");
+            PruebaTecnicaApplication.logger.warn("404: El activo fijo con id = "+afijId+" no existe.");
             return ResponseEntity.badRequest().build();
         }
         else{
             try {
-                PruebaTecnicaApplication.logger.info("200: El activo fijo con id =" + afijId + " ha sido actualizado satisfactoriamente.");
                 ActivoFijo activoFijoActualizado = implActivoFijoService.actualizarActivo(activoFijo);
+                PruebaTecnicaApplication.logger.info("200: El activo fijo con id =" + afijId + " ha sido actualizado satisfactoriamente.");
                 return ResponseEntity.ok().build();
             }
             catch (Exception ex){
@@ -153,7 +153,7 @@ public class ActivosApi {
         PruebaTecnicaApplication.logger.info("El cliente con IP **** **** ***** ha hecho una petición PUT al recurso 'activos/actualizarSerial" +
                 "InternoYFechaDeBaja/"+afijId);
         if(!(implActivoFijoService.buscarPorId(afijId)).isPresent()){
-            PruebaTecnicaApplication.logger.warn("400: El activo fijo con id = "+afijId+" no existe.");
+            PruebaTecnicaApplication.logger.warn("404: El activo fijo con id = "+afijId+" no existe.");
             return ResponseEntity.badRequest().build();
         }
         else{
@@ -168,6 +168,28 @@ public class ActivosApi {
             catch(Exception ex){
                 ex.printStackTrace();
                 PruebaTecnicaApplication.logger.error("500: "+ex);
+                return ResponseEntity.status(500).build();
+            }
+        }
+    }
+
+    @GetMapping(value = "/activoFijo/{afijId}", produces = "application/json")
+    public ResponseEntity<?> buscarPorId(@PathVariable("afijId") int afijId){
+        PruebaTecnicaApplication.logger.info("El cliente con IP **** **** ***** ha hecho una petición GET al recurso 'activos/activoFijo/"+afijId);
+        Optional<ListaActivosFijos> activoFijoSolicitado = implListaActivosFijosService.buscarPorId(afijId);
+        if(!activoFijoSolicitado.isPresent()){
+            PruebaTecnicaApplication.logger.warn("404: El activo fijo con id = "+afijId+" no existe.");
+            return ResponseEntity.notFound().build();
+        }
+        else{
+            try{
+                ListaActivosFijos activoFijoEncontrado = activoFijoSolicitado.get();
+                PruebaTecnicaApplication.logger.info("200: El activo fijo con id =" + afijId + " ha sido encontrado.");
+                return new ResponseEntity<>(activoFijoEncontrado, HttpStatus.OK);
+            }
+            catch (Exception ex){
+                ex.printStackTrace();
+                PruebaTecnicaApplication.logger.error("500: Error en el servidor"+ex);
                 return ResponseEntity.status(500).build();
             }
         }

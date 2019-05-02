@@ -11,6 +11,4 @@ import java.util.ArrayList;
 
 @Repository
 public interface ActivoFijoRepository extends CrudRepository<ActivoFijo, Integer> {
-    @Query(value = "SELECT a FROM ActivoFijo a WHERE a.afijTipo = :afijTipo")
-    ArrayList<ActivoFijo> findByAfijTipo(String afijTipo);
 }

@@ -6,10 +6,12 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 public interface ListaActivosFijosService {
     List<ListaActivosFijos> listarActivosFijos();
     List<ListaActivosFijos> listarActivosFijosPorTipo(String tipo);
     List<ListaActivosFijos> listarActivosFijosPorFechaDeCompra(Date fechaDeCompra);
     ListaActivosFijos buscarActivoFijoPorNumeroDeSerie(String numeroDeSerie);
+    Optional<ListaActivosFijos> buscarPorId(int id);
 }

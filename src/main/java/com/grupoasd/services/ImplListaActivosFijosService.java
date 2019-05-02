@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ImplListaActivosFijosService implements ListaActivosFijosService{
@@ -31,5 +32,10 @@ public class ImplListaActivosFijosService implements ListaActivosFijosService{
     @Override
     public ListaActivosFijos buscarActivoFijoPorNumeroDeSerie(String numeroDeSerie) {
         return listaActivosFijosRepository.findByAfijNumeroserie(numeroDeSerie);
+    }
+
+    @Override
+    public Optional<ListaActivosFijos> buscarPorId(int id) {
+        return listaActivosFijosRepository.findById(id);
     }
 }
