@@ -24,7 +24,7 @@ public class ActivosApi {
 
     @GetMapping(value = "/todos")
     public ResponseEntity<?> todos(){
-        PruebaTecnicaApplication.logger.info("El cliente con IP **** **** ***** ha hecho una petición GET al recurso '/todos'");
+        PruebaTecnicaApplication.logger.info("El cliente con IP **** **** ***** ha hecho una petición GET al recurso '/activos/todos'");
         try {
             List<ListaActivosFijos> todos = implListaActivosFijosService.listarActivosFijos();
             if (!todos.isEmpty()) {
@@ -43,7 +43,7 @@ public class ActivosApi {
 
     @GetMapping(value = "/tipo/{afijTipo}")
     public ResponseEntity<?> buscarPorTipo(@PathVariable("afijTipo") String afijTipo){
-        PruebaTecnicaApplication.logger.info("El cliente con IP **** **** ***** ha hecho una petición GET al recurso 'activos/tipo/"
+        PruebaTecnicaApplication.logger.info("El cliente con IP **** **** ***** ha hecho una petición GET al recurso '/activos/tipo/"
                 +afijTipo+"'.");
         try{
             List<ListaActivosFijos> activosPorTipo = implListaActivosFijosService.listarActivosFijosPorTipo(afijTipo);

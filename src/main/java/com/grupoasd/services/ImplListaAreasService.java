@@ -14,6 +14,6 @@ public class ImplListaAreasService implements ListaAreasService{
 
     @Override
     public List<ListaAreas> listarAreas() {
-        return (ArrayList<ListaAreas>)listaAreasRepository.findAll();
+        return (List<ListaAreas>)listaAreasRepository.findAll();
     }
 }

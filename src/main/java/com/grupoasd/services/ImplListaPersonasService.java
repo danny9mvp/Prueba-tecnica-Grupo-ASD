@@ -14,6 +14,6 @@ public class ImplListaPersonasService implements ListaPersonasService {
 
     @Override
     public List<ListaPersonas> listarPersonas() {
-        return (ArrayList<ListaPersonas>)listaPersonasRepository.findAll();
+        return (List<ListaPersonas>)listaPersonasRepository.findAll();
     }
 }
