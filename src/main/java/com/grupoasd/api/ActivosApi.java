@@ -194,4 +194,25 @@ public class ActivosApi {
             }
         }
     }
+
+    @GetMapping(value = "/listarSeriales", produces = "application/json")
+    public ResponseEntity<?> listarSeriales(){
+        PruebaTecnicaApplication.logger.info("El cliente con IP **** **** ***** ha hecho una petición GET al recurso 'activos/listarSeriales");
+        try {
+            List<String> listaSeriales = implListaActivosFijosService.listarSeriales(implListaActivosFijosService.listarActivosFijos());
+            if(!listaSeriales.isEmpty()){
+                PruebaTecnicaApplication.logger.info("200: "+listaSeriales.size()+" seriales fueron encontrados.");
+                return ResponseEntity.ok(listaSeriales);
+            }
+            else{
+                PruebaTecnicaApplication.logger.warn("404: No se encontraron resultados.");
+                return ResponseEntity.notFound().build();
+            }
+        }
+        catch(Exception ex){
+            ex.printStackTrace();
+            PruebaTecnicaApplication.logger.error("500: Error en el servidor. "+ex);
+            return ResponseEntity.status(500).build();
+        }
+    }
 }

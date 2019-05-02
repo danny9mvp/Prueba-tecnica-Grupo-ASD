@@ -38,4 +38,15 @@ public class ImplListaActivosFijosService implements ListaActivosFijosService{
     public Optional<ListaActivosFijos> buscarPorId(int id) {
         return listaActivosFijosRepository.findById(id);
     }
+
+    @Override
+    public List<String> listarSeriales(List<ListaActivosFijos> listaActivosFijos) {
+        List<String> listaSeriales = new ArrayList<>();
+        listaActivosFijos.forEach((activoFijo)->{
+            if(activoFijo.getAfijNumeroserie() != null){
+                listaSeriales.add(activoFijo.getAfijNumeroserie());
+            }
+        });
+        return listaSeriales;
+    }
 }

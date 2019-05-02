@@ -14,4 +14,5 @@ public interface ListaActivosFijosService {
     List<ListaActivosFijos> listarActivosFijosPorFechaDeCompra(Date fechaDeCompra);
     ListaActivosFijos buscarActivoFijoPorNumeroDeSerie(String numeroDeSerie);
     Optional<ListaActivosFijos> buscarPorId(int id);
+    List<String> listarSeriales(List<ListaActivosFijos> listaActivosFijos);
 }
