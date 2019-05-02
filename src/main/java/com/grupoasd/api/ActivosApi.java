@@ -11,7 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.xml.ws.Response;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -124,6 +123,20 @@ public class ActivosApi {
             PruebaTecnicaApplication.logger.error("Imposible crear el nuevo activo fijo. Asegúrese de que los datos ingresados" +
                     " sean correctos.");
             return ResponseEntity.badRequest().build();
+        }
+    }
+
+    @PutMapping(value = "/actualizarActivoFijo/{afijId}", consumes = "application/json")
+    public ResponseEntity<?> actualizarActivo(@PathVariable("afijId") int afijId, @RequestBody ActivoFijo activoFijo){
+        PruebaTecnicaApplication.logger.info("El cliente con IP **** **** ***** ha hecho una petición PUT al recurso 'activos/actualizarActivoFijo/"+afijId);
+        if(!(implActivoFijoService.buscarPorId(afijId).isPresent())){
+            PruebaTecnicaApplication.logger.warn("400: El activo fijo con id = "+afijId+" no existe.");
+            return ResponseEntity.badRequest().build();
+        }
+        else{
+            PruebaTecnicaApplication.logger.info("200: El activo fijo con id ="+afijId+" ha sido actualizado satisfactoriamente.");
+            ActivoFijo activoFijoActualizado = implActivoFijoService.actualizarActivo(activoFijo);
+            return ResponseEntity.ok().build();
         }
     }
 }

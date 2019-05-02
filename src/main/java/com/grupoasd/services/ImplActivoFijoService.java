@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ImplActivoFijoService implements ActivoFijoService{
@@ -18,12 +19,18 @@ public class ImplActivoFijoService implements ActivoFijoService{
     }
 
     @Override
-    public ActivoFijo actualizarActivo(ActivoFijo anteriorActivoFijo) {
-        return null;
+    public ActivoFijo actualizarActivo(ActivoFijo activoFijo) {
+        ActivoFijo activoFijoActualizado = activoFijoRepository.save(activoFijo);
+        return activoFijoActualizado;
     }
 
     @Override
     public ActivoFijo actualizarSerialYFechaDeBaja(ActivoFijo anteriorActivoFijo) {
         return null;
+    }
+
+    @Override
+    public Optional<ActivoFijo> buscarPorId(int id) {
+        return activoFijoRepository.findById(id);
     }
 }

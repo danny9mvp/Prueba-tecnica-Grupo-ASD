@@ -73,7 +73,8 @@ public class ActivoFijo implements Serializable {
         this.afijEstadoactual = afijEstadoactual;
     }
 
-    public ActivoFijo(@JsonProperty("nombre") String afijNombre, @JsonProperty("descripcion") String afijDescripcion
+    public ActivoFijo(@JsonProperty("id") int afijId, @JsonProperty("nombre") String afijNombre,
+                      @JsonProperty("descripcion") String afijDescripcion
             , @JsonProperty("tipo") String afijTipo, @JsonProperty("serial") String afijNumeroserie,
                       @JsonProperty("numeroInventario") String afijNumeroinventario, @JsonProperty("alto") float afijAlto
             , @JsonProperty("largo") float afijLargo, @JsonProperty("ancho") float afijAncho, @JsonProperty("peso") float afijPeso,
