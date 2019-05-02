@@ -1,5 +1,6 @@
 package com.grupoasd.api;
 
+import com.grupoasd.com.grupoasd.pojos.USerialFechaRequest;
 import com.grupoasd.entities.ActivoFijo;
 import com.grupoasd.entities.ListaActivosFijos;
 import com.grupoasd.pruebatecnica.PruebaTecnicaApplication;
@@ -134,9 +135,41 @@ public class ActivosApi {
             return ResponseEntity.badRequest().build();
         }
         else{
-            PruebaTecnicaApplication.logger.info("200: El activo fijo con id ="+afijId+" ha sido actualizado satisfactoriamente.");
-            ActivoFijo activoFijoActualizado = implActivoFijoService.actualizarActivo(activoFijo);
-            return ResponseEntity.ok().build();
+            try {
+                PruebaTecnicaApplication.logger.info("200: El activo fijo con id =" + afijId + " ha sido actualizado satisfactoriamente.");
+                ActivoFijo activoFijoActualizado = implActivoFijoService.actualizarActivo(activoFijo);
+                return ResponseEntity.ok().build();
+            }
+            catch (Exception ex){
+                ex.printStackTrace();
+                PruebaTecnicaApplication.logger.error("500: "+ex);
+                return ResponseEntity.status(500).build();
+            }
+        }
+    }
+
+    @PutMapping(value = "/actualizarSerialInternoYFechaDeBaja/{afijId}", consumes = "application/json")
+    public ResponseEntity<?> actualizarSerialInternoYFechaDeBaja(@PathVariable("afijId") int afijId, @RequestBody USerialFechaRequest usfRequest){
+        PruebaTecnicaApplication.logger.info("El cliente con IP **** **** ***** ha hecho una petición PUT al recurso 'activos/actualizarSerial" +
+                "InternoYFechaDeBaja/"+afijId);
+        if(!(implActivoFijoService.buscarPorId(afijId)).isPresent()){
+            PruebaTecnicaApplication.logger.warn("400: El activo fijo con id = "+afijId+" no existe.");
+            return ResponseEntity.badRequest().build();
+        }
+        else{
+            try {
+                ActivoFijo activoFijoActualizado = implActivoFijoService.buscarPorId(afijId).get();
+                activoFijoActualizado.setAfijNumeroinventario(usfRequest.getUsfrSerial());
+                activoFijoActualizado.setAfijFechabaja(usfRequest.getUsfrFechaBaja());
+                implActivoFijoService.actualizarSerialYFechaDeBaja(activoFijoActualizado);
+                PruebaTecnicaApplication.logger.info("200: El activo fijo con id =" + afijId + " ha sido actualizado satisfactoriamente.");
+                return ResponseEntity.ok().build();
+            }
+            catch(Exception ex){
+                ex.printStackTrace();
+                PruebaTecnicaApplication.logger.error("500: "+ex);
+                return ResponseEntity.status(500).build();
+            }
         }
     }
 }

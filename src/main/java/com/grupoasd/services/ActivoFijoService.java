@@ -9,6 +9,6 @@ import java.util.Optional;
 public interface ActivoFijoService {
     ActivoFijo crearActivo(ActivoFijo nuevoActivoFijo);
     ActivoFijo actualizarActivo(ActivoFijo activoFijo);
-    ActivoFijo actualizarSerialYFechaDeBaja(ActivoFijo anteriorActivoFijo);
+    ActivoFijo actualizarSerialYFechaDeBaja(ActivoFijo activoFijo);
     Optional<ActivoFijo> buscarPorId(int id);
 }

@@ -25,8 +25,8 @@ public class ImplActivoFijoService implements ActivoFijoService{
     }
 
     @Override
-    public ActivoFijo actualizarSerialYFechaDeBaja(ActivoFijo anteriorActivoFijo) {
-        return null;
+    public ActivoFijo actualizarSerialYFechaDeBaja(ActivoFijo activoFijo) {
+        return activoFijoRepository.save(activoFijo);
     }
 
     @Override
