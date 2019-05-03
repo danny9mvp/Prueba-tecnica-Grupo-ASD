@@ -35,10 +35,10 @@ public class ListaActivosFijos {
     @Column(name = "afij_valorcompra")
     private BigInteger afijValorcompra;
     @Column(name = "afij_fechacompra")
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private Date afijFechacompra;
     @Column(name = "afij_fechabaja")
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private Date afijFechabaja;
     @Column(name = "afij_estadoactual")
     private String afijEstadoactual;

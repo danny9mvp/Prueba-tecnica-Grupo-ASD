@@ -1,5 +1,6 @@
 package com.grupoasd.api;
 
+import com.grupoasd.com.grupoasd.pojos.ActivosFechaCompraRequest;
 import com.grupoasd.com.grupoasd.pojos.USerialFechaRequest;
 import com.grupoasd.entities.ActivoFijo;
 import com.grupoasd.entities.ListaActivosFijos;
@@ -64,23 +65,20 @@ public class ActivosApi {
 
     }
 
-    @GetMapping("/fechaDeCompra/{stringFechaCompra}")
-    public ResponseEntity<?> buscarPorFechaDeCompra(@PathVariable("stringFechaCompra")
-                                                        @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date afijFechaCompra){
-        PruebaTecnicaApplication.logger.info("El cliente con IP **** **** ***** ha hecho una petición GET al recurso 'activos/fechaDecompra/"
-                +afijFechaCompra+"'.");
+    @PostMapping("/fechaDeCompra")
+    public ResponseEntity<?> buscarPorFechaDeCompra(@RequestBody ActivosFechaCompraRequest activoFechaCompraRequest){
+        PruebaTecnicaApplication.logger.info("El cliente con IP **** **** ***** ha hecho una petición POST al recurso 'activos/fechaDecompra");
         try{
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
-            PruebaTecnicaApplication.logger.info("Fecha: "+afijFechaCompra);
-            List<ListaActivosFijos> activosPorFechaDeCompra = implListaActivosFijosService.listarActivosFijosPorFechaDeCompra(afijFechaCompra);
+            PruebaTecnicaApplication.logger.info("Fecha: "+activoFechaCompraRequest.getFechaCompra());
+            List<ListaActivosFijos> activosPorFechaDeCompra = implListaActivosFijosService.listarActivosFijosPorFechaDeCompra(activoFechaCompraRequest.getFechaCompra());
             if(!activosPorFechaDeCompra.isEmpty()){
                 PruebaTecnicaApplication.logger.info("200: "+activosPorFechaDeCompra.size()+" Activos Fijos con fecha de compra " +
-                        "'" + afijFechaCompra + "' fueron encontrados.");
+                        "'" + activoFechaCompraRequest.getFechaCompra() + "' fueron encontrados.");
                 return new ResponseEntity<>(activosPorFechaDeCompra, HttpStatus.OK);
             }
             else{
-                PruebaTecnicaApplication.logger.warn("404: No se encontraron resultados en el recurso '/activos/fechaDeCompra/"+afijFechaCompra+"'.");
+                PruebaTecnicaApplication.logger.warn("404: No se encontraron resultados en el recurso '/activos/fechaDeCompra.");
                 return ResponseEntity.notFound().build();
             }
         }

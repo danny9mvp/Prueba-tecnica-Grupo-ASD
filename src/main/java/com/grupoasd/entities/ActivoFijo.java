@@ -43,10 +43,10 @@ public class ActivoFijo implements Serializable {
     @Column(name = "afij_valorcompra")
     private BigInteger afijValorcompra;
     @Column(name = "afij_fechacompra")
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private Date afijFechacompra;
     @Column(name = "afij_fechabaja")
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private Date afijFechabaja;
     @Basic(optional = false)
     @Column(name = "afij_estadoactual")
