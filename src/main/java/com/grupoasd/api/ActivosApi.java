@@ -1,6 +1,5 @@
 package com.grupoasd.api;
 
-import com.grupoasd.com.grupoasd.pojos.ActivosFechaCompraRequest;
 import com.grupoasd.com.grupoasd.pojos.USerialFechaRequest;
 import com.grupoasd.entities.ActivoFijo;
 import com.grupoasd.entities.ListaActivosFijos;
@@ -8,7 +7,6 @@ import com.grupoasd.pruebatecnica.PruebaTecnicaApplication;
 import com.grupoasd.services.ImplActivoFijoService;
 import com.grupoasd.services.ImplListaActivosFijosService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -65,16 +63,16 @@ public class ActivosApi {
 
     }
 
-    @PostMapping("/fechaDeCompra")
-    public ResponseEntity<?> buscarPorFechaDeCompra(@RequestBody ActivosFechaCompraRequest activoFechaCompraRequest){
+    @GetMapping("/fechaDeCompra/{fechaDeCompra}")
+    public ResponseEntity<?> buscarPorFechaDeCompra(@PathVariable("fechaDeCompra") String stringFecha){
         PruebaTecnicaApplication.logger.info("El cliente con IP **** **** ***** ha hecho una petición POST al recurso 'activos/fechaDecompra");
         try{
-
-            PruebaTecnicaApplication.logger.info("Fecha: "+activoFechaCompraRequest.getFechaCompra());
-            List<ListaActivosFijos> activosPorFechaDeCompra = implListaActivosFijosService.listarActivosFijosPorFechaDeCompra(activoFechaCompraRequest.getFechaCompra());
+            Date fechaCompra = new SimpleDateFormat("yyyy-MM-dd").parse(stringFecha);
+            PruebaTecnicaApplication.logger.info("Fecha: "+fechaCompra);
+            List<ListaActivosFijos> activosPorFechaDeCompra = implListaActivosFijosService.listarActivosFijosPorFechaDeCompra(fechaCompra);
             if(!activosPorFechaDeCompra.isEmpty()){
                 PruebaTecnicaApplication.logger.info("200: "+activosPorFechaDeCompra.size()+" Activos Fijos con fecha de compra " +
-                        "'" + activoFechaCompraRequest.getFechaCompra() + "' fueron encontrados.");
+                        "'" + stringFecha + "' fueron encontrados.");
                 return new ResponseEntity<>(activosPorFechaDeCompra, HttpStatus.OK);
             }
             else{

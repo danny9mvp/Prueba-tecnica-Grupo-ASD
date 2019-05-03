@@ -16,7 +16,7 @@ import java.util.List;
 public interface ListaActivosFijosRepository extends PagingAndSortingRepository<ListaActivosFijos, Integer> {
     List<ListaActivosFijos> findAllByAfijTipo(String afijTipo);
     @Query("select l from ListaActivosFijos l where l.afijFechacompra = :fechaDeCompra")
-    List<ListaActivosFijos> findAllByAfijFechacompraStartingWith(
-            @Param("fechaDeCompra") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date fechaDeCompra);
+    List<ListaActivosFijos> findAllByAfijFechacompra(
+            @Param("fechaDeCompra") Date fechaDeCompra);
     List<ListaActivosFijos> findAllByAfijNumeroserie(String afijNumeroSerie);
 }

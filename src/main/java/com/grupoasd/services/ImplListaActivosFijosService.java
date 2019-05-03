@@ -26,7 +26,7 @@ public class ImplListaActivosFijosService implements ListaActivosFijosService{
 
     @Override
     public List<ListaActivosFijos> listarActivosFijosPorFechaDeCompra(Date fechaDeCompra) {
-        return listaActivosFijosRepository.findAllByAfijFechacompraStartingWith(fechaDeCompra);
+        return listaActivosFijosRepository.findAllByAfijFechacompra(fechaDeCompra);
     }
 
     @Override
