@@ -30,8 +30,8 @@ public class ImplListaActivosFijosService implements ListaActivosFijosService{
     }
 
     @Override
-    public ListaActivosFijos buscarActivoFijoPorNumeroDeSerie(String numeroDeSerie) {
-        return listaActivosFijosRepository.findByAfijNumeroserie(numeroDeSerie);
+    public List<ListaActivosFijos> buscarActivoFijoPorNumeroDeSerie(String numeroDeSerie) {
+        return (List<ListaActivosFijos>) listaActivosFijosRepository.findAllByAfijNumeroserie(numeroDeSerie);
     }
 
     @Override

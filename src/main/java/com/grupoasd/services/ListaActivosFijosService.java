@@ -12,7 +12,7 @@ public interface ListaActivosFijosService {
     List<ListaActivosFijos> listarActivosFijos();
     List<ListaActivosFijos> listarActivosFijosPorTipo(String tipo);
     List<ListaActivosFijos> listarActivosFijosPorFechaDeCompra(Date fechaDeCompra);
-    ListaActivosFijos buscarActivoFijoPorNumeroDeSerie(String numeroDeSerie);
+    List<ListaActivosFijos> buscarActivoFijoPorNumeroDeSerie(String numeroDeSerie);
     Optional<ListaActivosFijos> buscarPorId(int id);
     List<String> listarSeriales(List<ListaActivosFijos> listaActivosFijos);
 }
