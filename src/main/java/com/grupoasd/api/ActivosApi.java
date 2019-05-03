@@ -97,8 +97,9 @@ public class ActivosApi {
         +numeroDeSerie);
         try{
             if(implListaActivosFijosService.buscarActivoFijoPorNumeroDeSerie(numeroDeSerie) != null){
-                PruebaTecnicaApplication.logger.info("200:  Activo Fijo con número de serie "+numeroDeSerie+" encontrado.");
-                return new ResponseEntity(implListaActivosFijosService.buscarActivoFijoPorNumeroDeSerie(numeroDeSerie), HttpStatus.OK);
+                List<ListaActivosFijos> listaActivosFijos = implListaActivosFijosService.buscarActivoFijoPorNumeroDeSerie(numeroDeSerie);
+                PruebaTecnicaApplication.logger.info("200:"+listaActivosFijos.size()+" Activos Fijos con número de serie "+numeroDeSerie+" encontrados.");
+                return new ResponseEntity(listaActivosFijos, HttpStatus.OK);
             }
             else{
                 PruebaTecnicaApplication.logger.warn("404: No se encontraron resultados en el recurso '/activos/numeroDeSerie/"+numeroDeSerie+"'.");
