@@ -15,4 +15,5 @@ public interface ListaActivosFijosService {
     List<ListaActivosFijos> buscarActivoFijoPorNumeroDeSerie(String numeroDeSerie);
     Optional<ListaActivosFijos> buscarPorId(int id);
     List<String> listarSeriales(List<ListaActivosFijos> listaActivosFijos);
+    List<Integer> listarIds(List<ListaActivosFijos> listaActivosFijos);
 }

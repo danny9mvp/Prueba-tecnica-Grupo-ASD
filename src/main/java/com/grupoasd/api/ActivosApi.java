@@ -212,4 +212,26 @@ public class ActivosApi {
             return ResponseEntity.status(500).build();
         }
     }
+
+    @GetMapping(value = "/listarIds", produces = "application/json")
+    public ResponseEntity<?> listarIds(){
+        PruebaTecnicaApplication.logger.info("El cliente con IP **** **** ***** ha hecho una petición GET al recurso 'activos/listarIds");
+        try {
+            List<Integer> listaIds = implListaActivosFijosService.listarIds(implListaActivosFijosService.listarActivosFijos());
+            if(!listaIds.isEmpty()){
+                PruebaTecnicaApplication.logger.info("200: "+listaIds.size()+" ids fueron encontrados.");
+                return ResponseEntity.ok(listaIds);
+            }
+            else{
+                PruebaTecnicaApplication.logger.warn("404: No se encontraron resultados.");
+                return ResponseEntity.notFound().build();
+            }
+        }
+        catch(Exception ex){
+            ex.printStackTrace();
+            PruebaTecnicaApplication.logger.error("500: Error en el servidor. "+ex);
+            return ResponseEntity.status(500).build();
+        }
+    }
+
 }
