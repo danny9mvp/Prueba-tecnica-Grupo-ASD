@@ -1,0 +1,35 @@
+= activos/activoFijo guía REST API
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 4
+:sectlinks:
+
+= Recursos
+
+== activoFijo REST Service
+
+Muestra un activo fijo consultado por su Id.
+
+=== Accediendo al recurso activoFijo GET
+
+==== Estructura de la petición
+
+include::{snippets}/prueba-tecnica-application-tests/buscar-por-id-with-provided-content/http-request.adoc[]
+
+==== Parámetros de la petición
+
+include::{snippets}/prueba-tecnica-application-tests/buscar-por-id-with-provided-content/request-parameters.adoc[]
+
+==== Campos de la respuesta
+
+include::{snippets}/prueba-tecnica-application-tests/buscar-por-id-with-provided-content/response-fields.adoc[]
+
+==== Ejemplo de respuesta
+
+include::{snippets}/prueba-tecnica-application-tests/buscar-por-id-with-provided-content/http-response.adoc[]
+
+==== CURL petición
+
+include::{snippets}/prueba-tecnica-application-tests/buscar-por-id-with-provided-content/curl-request.adoc[]
