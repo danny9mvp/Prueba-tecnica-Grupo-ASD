@@ -8,14 +8,18 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+
+import java.util.logging.Level;
 
 @EntityScan("com.grupoasd.entities")
 @ComponentScan({"com.grupoasd.api","com.grupoasd.services"})
 @EnableJpaRepositories("com.grupoasd.repositories")
 @SpringBootApplication
-public class PruebaTecnicaApplication {
+public class PruebaTecnicaApplication extends SpringBootServletInitializer {
     public static Logger logger = LogManager.getLogger(PruebaTecnicaApplication.class.getName());
 
     public static void main(String[] args) {
@@ -28,5 +32,10 @@ public class PruebaTecnicaApplication {
         } catch (Exception ex) {
             logger.error(ex);
         }
+    }
+
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder app) {
+        return app.sources(PruebaTecnicaApplication.class);
     }
 }
