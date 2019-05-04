@@ -15,6 +15,7 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
+ * Persona es la entidad asociada a la tabla 'PERSONA' en la base de datos.
  *
  * @author DanielMauricio
  */
@@ -24,17 +25,29 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Persona implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    /**
+     * Id de la persona.
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "pers_id", columnDefinition = "serial")
     private Integer persId;
+    /**
+     * Nombres de la persona.
+     */
     @Basic(optional = false)
     @Column(name = "pers_nombres")
     private String persNombres;
+    /**
+     * Apellidos de la persona.
+     */
     @Basic(optional = false)
     @Column(name = "pers_apellidos")
     private String persApellidos;
+    /**
+     * Activo Fijo asociado a una persona.
+     */
     @JoinColumn(name = "pers_activofijo", referencedColumnName = "afij_id")
     @OneToOne(optional = false)
     private ActivoFijo persActivofijo;

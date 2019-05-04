@@ -4,8 +4,20 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Date;
 
+/**
+ * La clase USerialFechaRequest es una entidad diseñada específicamente para representar el JSON recibido por el recurso
+ * actualizarSerialInternoYFechaDeBaja.
+ *
+ * @author Daniel Mauricio
+ */
 public class USerialFechaRequest {
+    /**
+     * Número de inventario.
+     */
     private String usfrSerial;
+    /**
+     * Fecha de baja.
+     */
     private Date usfrFechaBaja;
 
     public USerialFechaRequest(@JsonProperty("serial") String usfrSerial, @JsonProperty("fechaBaja") Date usfrFechaBaja){

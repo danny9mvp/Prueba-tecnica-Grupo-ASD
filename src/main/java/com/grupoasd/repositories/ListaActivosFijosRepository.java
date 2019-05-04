@@ -12,6 +12,15 @@ import javax.persistence.TemporalType;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * ListaActivosFijosRepository es una interface usada como clase utilitaria para la implementación de consultas en
+ * la entidad ListaActivos.
+ *
+ * Esta interface hereda los métodos de {@link org.springframework.data.repository.PagingAndSortingRepository}.
+ *
+ * @author Daniel Mauricio
+ */
+
 @Repository
 public interface ListaActivosFijosRepository extends PagingAndSortingRepository<ListaActivosFijos, Integer> {
     List<ListaActivosFijos> findAllByAfijTipo(String afijTipo);

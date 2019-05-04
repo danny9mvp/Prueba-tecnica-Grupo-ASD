@@ -23,6 +23,13 @@ import static org.springframework.restdocs.request.RequestDocumentation.requestP
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+/**
+ * PruebaTecnicaApplicationTest es la clase encargada de las pruebas unitarias mediante Spring Boot Test
+ *
+ * @author Daniel Mauricio
+ *
+ */
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class PruebaTecnicaApplicationTests {

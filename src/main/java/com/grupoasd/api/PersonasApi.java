@@ -11,6 +11,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * PersonasApi es la clase controladora para recursos REST de Personas.
+ *
+ * @author Daniel Mauricio
+ */
+
 @RestController
 @CrossOrigin(origins = "*", methods = RequestMethod.GET)
 @RequestMapping("/personas")

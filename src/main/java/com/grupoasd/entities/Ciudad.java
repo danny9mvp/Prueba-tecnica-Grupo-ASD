@@ -14,20 +14,34 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+/**
+ * La clase Ciudad es la entidad asociada a la tabla 'CIUDAD' en la base de datos.
+ *
+ * @author Daniel Mauricio
+ */
 @Entity
 @Table(name = "ciudad")
 @XmlRootElement
 public class Ciudad implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    /**
+     * Id de la ciudad.
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "ciud_id")
     private Integer ciudId;
+    /**
+     * Nombre de la ciudad.
+     */
     @Basic(optional = false)
     @Column(name = "ciud_nombre")
     private String ciudNombre;
+    /**
+     * Listado de áreas pertenecientes a una ciudad.
+     */
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "areaCiudad")
     private List<Area> areaList;
 

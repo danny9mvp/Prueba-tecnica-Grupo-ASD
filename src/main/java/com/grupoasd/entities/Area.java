@@ -16,6 +16,7 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
+ * Area es la entidad asociada a la tabla 'AREA' en la base de datos.
  *
  * @author DanielMauricio
  */
@@ -25,17 +26,30 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Area implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
+    /**
+     * Id del área.
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "area_id")
     private Integer areaId;
+    /**
+     * Nombre del área.
+     */
     @Basic(optional = false)
     @Column(name = "area_nombre")
     private String areaNombre;
+    /**
+     * Activo Fijo asociado a un área.
+     */
     @JoinColumn(name = "area_activofijo", referencedColumnName = "afij_id")
     @OneToOne(optional = false)
     private ActivoFijo areaActivofijo;
+    /**
+     * Ciudad donde se ubica un área.
+     */
     @JoinColumn(name = "area_ciudad", referencedColumnName = "ciud_id")
     @ManyToOne(optional = false)
     private Ciudad areaCiudad;

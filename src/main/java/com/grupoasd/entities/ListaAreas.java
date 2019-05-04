@@ -10,6 +10,7 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
+ * Lista Areas es la entidad asociada a la vista 'listarareas' en la base de datos.
  *
  * @author DanielMauricio
  */
@@ -19,13 +20,25 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class ListaAreas implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    /**
+     * Id del área.
+     */
     @Id
     @Column(name = "area_id")
     private Integer areaId;
+    /**
+     * Nombre del área.
+     */
     @Column(name = "area_nombre")
     private String areaNombre;
+    /**
+     * Id del Activo Fijo asociado a un área.
+     */
     @Column(name = "area_activofijo")
     private Integer areaActivofijo;
+    /**
+     * Id de la ciudad donde se ubica un área.
+     */
     @Column(name = "area_ciudad")
     private Integer areaCiudad;
 

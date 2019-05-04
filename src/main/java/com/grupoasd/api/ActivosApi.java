@@ -14,6 +14,11 @@ import org.springframework.web.bind.annotation.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+/**
+ * ActivosApi es la clase controladora para recursos REST de Activos Fijos.
+ *
+ * @author Daniel Mauricio
+ */
 @RestController
 @CrossOrigin(origins = "*", methods = {RequestMethod.GET,RequestMethod.POST, RequestMethod.PUT})
 @RequestMapping("/activos")

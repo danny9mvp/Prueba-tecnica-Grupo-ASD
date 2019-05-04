@@ -5,43 +5,95 @@ import javax.xml.bind.annotation.XmlRootElement;
 import java.math.BigInteger;
 import java.util.Date;
 
+/**
+ * ListaActivosFijos es la entidad asociada a la vista 'listaractivosfijos' en la base de datos, se utiliza en lugar de ActivoFijo
+ * para consultas.
+ *
+ * @author Daniel Mauricio
+ */
+
 @Entity
 @Table(name = "listaractivos")
 @XmlRootElement
 public class ListaActivosFijos {
     private static final long serialVersionUID = 1L;
+    /**
+     * Id del Activo Fijo.
+     */
     @Id
     @Column(name = "afij_id")
     private Integer afijId;
+    /**
+     * Nombre del Activo Fijo.
+     */
     @Column(name = "afij_nombre")
     private String afijNombre;
+    /**
+     * Descripción del Activo Fijo.
+     */
     @Column(name = "afij_descripcion")
     private String afijDescripcion;
+    /**
+     * Tipo de Activo Fijo.
+     */
     @Column(name = "afij_tipo")
     private String afijTipo;
+    /**
+     * Número de serie o serial del Activo Fijo.
+     */
     @Column(name = "afij_numeroserie")
     private String afijNumeroserie;
+    /**
+     * Número de inventario del Activo Fijo.
+     */
     @Column(name = "afij_numeroinventario")
     private String afijNumeroinventario;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    /**
+     * Altura del Activo Fijo.
+     */
     @Column(name = "afij_alto")
     private Float afijAlto;
+    /**
+     * Longitud del Activo Fijo.
+     */
     @Column(name = "afij_largo")
     private Float afijLargo;
+    /**
+     * Ancho del Activo Fijo.
+     */
     @Column(name = "afij_ancho")
     private Float afijAncho;
+    /**
+     * Peso del Activo Fijo.
+     */
     @Column(name = "afij_peso")
     private Float afijPeso;
+    /**
+     * Valor de compra del Activo Fijo.
+     */
     @Column(name = "afij_valorcompra")
     private BigInteger afijValorcompra;
+    /**
+     * Fecha de compra del Activo Fijo.
+     */
     @Column(name = "afij_fechacompra")
     @Temporal(TemporalType.DATE)
     private Date afijFechacompra;
+    /**
+     * Fecha de baja del Activo Fijo.
+     */
     @Column(name = "afij_fechabaja")
     @Temporal(TemporalType.DATE)
     private Date afijFechabaja;
+    /**
+     * Estado actual del Activo Fijo.
+     */
     @Column(name = "afij_estadoactual")
     private String afijEstadoactual;
+    /**
+     * Color del Activo Fijo.
+     */
     @Column(name = "afij_color")
     private String afijColor;
 

@@ -11,6 +11,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * AreasApi es la clase controladora para recursos REST de Áreas.
+ *
+ * @author Daniel Mauricio
+ */
 @RestController
 @CrossOrigin(origins = "*", methods = {RequestMethod.GET})
 @RequestMapping("/areas")
